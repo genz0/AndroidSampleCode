@@ -8,6 +8,7 @@ import java.io.Writer;
 import java.nio.charset.Charset;
 
 import jp.gr.java_conf.genzo.android.util.Closer;
+import jp.gr.java_conf.genzo.android.util.CursorHelper;
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
@@ -176,6 +177,27 @@ public class MainActivity extends Activity {
 		db.close();
 		helper.close();
 
+	}
+
+	public void onButton3(View view) {
+
+		// DBをオープンして、簡単なクエリーを投げる
+		SQLiteOpenHelper helper = new DBOpenHelper(this);
+		SQLiteDatabase db = helper.getReadableDatabase();
+		Cursor cursor = db
+				.rawQuery("select * from TEST_TABLE", new String[] {});
+		CursorHelper ch = new CursorHelper(cursor);
+
+		// hasNext兼next
+		while (ch.hasNext()) {
+			// ・・・処理
+			Log.d("sql", "code2 data=" + cursor.getString(1));
+
+		}
+
+		cursor.close();
+		db.close();
+		helper.close();
 	}
 
 }

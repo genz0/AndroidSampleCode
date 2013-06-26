@@ -23,7 +23,6 @@ public class Closer {
 	 * 
 	 * @param closeable
 	 *            対象
-	 * @return
 	 * @return 入力と同じ
 	 */
 	public <T extends Closeable> T put(T closeable) {
